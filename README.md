@@ -15,9 +15,7 @@ Es werden jediglich die pom.xml, die README.txt und das src-Verzeichnis hochgela
 Usage
 -----
 
-    git clone git://github.com/panter/ch.panter.projectzero.git
-    cd ch.panter.projectzero
-    mvn install
+    noch keine Info
 
 Features
 --------
