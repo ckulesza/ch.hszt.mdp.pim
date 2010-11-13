@@ -202,8 +202,7 @@ public class Contact implements Serializable, PropertyChangeListener {
 	}
 
 	@Override
-	public void propertyChange(PropertyChangeEvent arg0) {
-		// TODO Auto-generated method stub
-
+	public void propertyChange(PropertyChangeEvent event) {
+		propertyChangeSupport.firePropertyChange("address", null, address);
 	}
 }

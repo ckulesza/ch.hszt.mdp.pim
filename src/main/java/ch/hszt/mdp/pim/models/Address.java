@@ -90,7 +90,5 @@ public class Address implements Serializable, PropertyChangeListener {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		// TODO Auto-generated method stub
-
 	}
 }

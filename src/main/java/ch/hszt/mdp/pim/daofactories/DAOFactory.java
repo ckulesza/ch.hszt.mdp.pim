@@ -1,9 +1,11 @@
 /**
  * 
  */
-package ch.hszt.mdp.pim.daos;
+package ch.hszt.mdp.pim.daofactories;
 
 import java.io.File;
+
+import ch.hszt.mdp.pim.daos.IContactDAO;
 
 /**
  * @author Christof Kulesza
