@@ -15,7 +15,7 @@ import ch.hszt.mdp.pim.models.Contact;
 public class SerializeContactDAO implements IContactDAO {
 
 	@Override
-	public Contact loadContactById() throws DataAccessException {
+	public Contact loadContactById(long id) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -27,40 +27,41 @@ public class SerializeContactDAO implements IContactDAO {
 	}
 
 	@Override
-	public void insertContact(Contact contact) throws DataAccessException {
+	public int insertContact(Contact contact) throws DataAccessException {
 		// TODO Auto-generated method stub
-
+		return 0;
 	}
 
 	@Override
-	public void insertContacts(List<Contact> contacts) throws DataAccessException {
+	public int insertContacts(List<Contact> contacts)
+			throws DataAccessException {
 		// TODO Auto-generated method stub
-
+		return 0;
 	}
 
 	@Override
-	public void updateContact(Contact contact) throws DataAccessException {
+	public boolean updateContact(Contact contact) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override
 	public void updateContacts(List<Contact> contacts)
 			throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void deleteContact(Contact contact) throws DataAccessException {
+	public boolean deleteContact(Contact contact) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override
-	public void deleteContacts(List<Contact> contact)
+	public boolean deleteContacts(List<Contact> contact)
 			throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 }

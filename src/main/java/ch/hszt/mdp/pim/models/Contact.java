@@ -13,7 +13,7 @@ import java.util.Date;
  * @author Christof Kulesza
  * 
  */
-public class Contact implements Serializable, PropertyChangeListener {
+public class Contact implements Serializable, PropertyChangeListener, Comparable<Contact> {
 
 	private static final long serialVersionUID = -8062971730282279711L;
 	private long id;
@@ -204,5 +204,11 @@ public class Contact implements Serializable, PropertyChangeListener {
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		propertyChangeSupport.firePropertyChange("address", null, address);
+	}
+
+	@Override
+	public int compareTo(Contact o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
