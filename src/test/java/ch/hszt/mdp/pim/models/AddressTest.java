@@ -10,7 +10,7 @@ import org.junit.Test;
 /**
  * @author Christof Kulesza
  * ja der Christof war's
- * gkuglhblasn
+ * allma
  * so ist es
  * noch ein Versuch
  */
