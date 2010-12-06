@@ -10,6 +10,7 @@ import org.junit.Test;
 /**
  * @author Christof Kulesza
  * ja der Christof war's
+ * so ist es
  */
 public class AddressTest {
 
