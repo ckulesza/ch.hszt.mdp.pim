@@ -23,4 +23,5 @@ Features
 * Java 1.6
 * Maven
 * Junit
+* HSQLDB 1.8.0.10
 
