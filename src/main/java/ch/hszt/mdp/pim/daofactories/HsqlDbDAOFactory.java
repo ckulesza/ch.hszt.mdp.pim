@@ -8,7 +8,9 @@ import ch.hszt.mdp.pim.daos.IContactDAO;
  *
  */
 
-public class HsqdbDAOFactory extends DAOFactory {
+public class HsqlDbDAOFactory extends DAOFactory {
+	
+	public HsqlDbDAOFactory() {}
 
 	@Override
 	public IContactDAO getCustomerDAO() {
