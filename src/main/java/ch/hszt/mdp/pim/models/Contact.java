@@ -13,7 +13,8 @@ import java.util.Date;
  * @author Christof Kulesza
  * 
  */
-public class Contact implements Serializable, PropertyChangeListener, Comparable<Contact> {
+public class Contact implements Serializable, PropertyChangeListener,
+		Comparable<Contact> {
 
 	private static final long serialVersionUID = -8062971730282279711L;
 	private long id;
@@ -37,7 +38,7 @@ public class Contact implements Serializable, PropertyChangeListener, Comparable
 	public void setGroup(String group) {
 		this.group = group;
 	}
-	
+
 	/**
 	 * @return the id
 	 */
@@ -54,15 +55,20 @@ public class Contact implements Serializable, PropertyChangeListener, Comparable
 	}
 
 	/**
-	 * @return the firstName
+	 * Get's the first name of the contact.
+	 * 
+	 * @return the first name
 	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
 	/**
+	 * 
+	 * Set's the first name of the contact.
+	 * 
 	 * @param firstName
-	 *            the firstName to set
+	 *            the first name to set
 	 */
 	public void setFirstName(String firstName) {
 		propertyChangeSupport.firePropertyChange("firstName", this.firstName,
@@ -70,6 +76,8 @@ public class Contact implements Serializable, PropertyChangeListener, Comparable
 	}
 
 	/**
+	 * Get's the last name of the contact.
+	 * 
 	 * @return the lastName
 	 */
 	public String getLastName() {
@@ -77,8 +85,10 @@ public class Contact implements Serializable, PropertyChangeListener, Comparable
 	}
 
 	/**
+	 * Set's the last name of the contact.
+	 * 
 	 * @param lastName
-	 *            the lastName to set
+	 *            the last name to set
 	 */
 	public void setLastName(String lastName) {
 		propertyChangeSupport.firePropertyChange("lastName", this.lastName,
@@ -86,15 +96,19 @@ public class Contact implements Serializable, PropertyChangeListener, Comparable
 	}
 
 	/**
-	 * @return the birthDate
+	 * Get's the birth date of the contact.
+	 * 
+	 * @return the birth date
 	 */
 	public Date getBirthDate() {
 		return birthDate;
 	}
 
 	/**
+	 * Set's the birth date of the contact.
+	 * 
 	 * @param birthDate
-	 *            the birthDate to set
+	 *            the birth date to set
 	 */
 	public void setBirthDate(Date birthDate) {
 		propertyChangeSupport.firePropertyChange("birthDate", this.birthDate,
@@ -122,15 +136,19 @@ public class Contact implements Serializable, PropertyChangeListener, Comparable
 	}
 
 	/**
-	 * @return the email
+	 * Get's the email address of the contact.
+	 * 
+	 * @return the email address
 	 */
 	public String getEmail() {
 		return email;
 	}
 
 	/**
+	 * Set's the email address of the contact.
+	 * 
 	 * @param email
-	 *            the email to set
+	 *            the email address to set
 	 */
 	public void setEmail(String email) {
 		propertyChangeSupport.firePropertyChange("email", this.email,
@@ -154,15 +172,19 @@ public class Contact implements Serializable, PropertyChangeListener, Comparable
 	}
 
 	/**
-	 * @return the telephone
+	 * Get's the telephone number of the contact.
+	 * 
+	 * @return the telephone number
 	 */
 	public String getTelephone() {
 		return telephone;
 	}
 
 	/**
+	 * Set's the telephone number of the contact.
+	 * 
 	 * @param telephone
-	 *            the telephone to set
+	 *            the telephone number to set
 	 */
 	public void setTelephone(String telephone) {
 		propertyChangeSupport.firePropertyChange("telephone", this.telephone,
@@ -220,9 +242,52 @@ public class Contact implements Serializable, PropertyChangeListener, Comparable
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	public String toString() {
-		String s = this.firstName +" " +  this.lastName + " [" + this.group + "]";
+		String s = this.firstName + " " + this.lastName + " [" + this.group
+				+ "]";
 		return s;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Contact)) {
+			return false;
+		}
+		Contact contact = (Contact) obj;
+		if (this.id != contact.getId()) {
+			return false;
+		}
+		if (!this.firstName.equals(contact.getFirstName())) {
+			return false;
+		}
+		if (!this.lastName.equals(contact.getLastName())) {
+			return false;
+		}
+		if (!this.birthDate.equals(contact.getBirthDate())) {
+			return false;
+		}
+		if (!this.address.equals(contact.getAddress())) {
+			return false;
+		}
+		if (!this.email.equals(contact.getEmail())) {
+			return false;
+		}
+		if (!this.url.equals(contact.getUrl())) {
+			return false;
+		}
+		if (!this.telephone.equals(contact.getTelephone())) {
+			return false;
+		}
+		if (!this.comment.equals(contact.getComment())) {
+			return false;
+		}
+		if (!this.job.equals(contact.getJob())) {
+			return false;
+		}
+		if (!this.group.equals(contact.getGroup())) {
+			return false;
+		}
+		return true;
 	}
 }

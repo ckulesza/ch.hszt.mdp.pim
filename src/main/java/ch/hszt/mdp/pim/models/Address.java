@@ -88,7 +88,7 @@ public class Address implements Serializable, PropertyChangeListener {
 	public void removePropertyChangeListener(PropertyChangeListener listener) {
 		propertyChangeSupport.removePropertyChangeListener(listener);
 	}
-	
+
 	public void setCountry(String country) {
 		this.country = country;
 	}
@@ -96,15 +96,37 @@ public class Address implements Serializable, PropertyChangeListener {
 	public String getCountry() {
 		return this.country;
 	}
-	
+
 	public void propertyChange(PropertyChangeEvent evt) {
 	}
-	
+
 	public String toString() {
-		return this.street + " " + 
-			   this.houseNumber + " \n" + 
-			   this.postalCode + " " + 
-			   this.place;
+		return this.street + " " + this.houseNumber + " \n" + this.postalCode
+				+ " " + this.place;
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Address)) {
+			return false;
+		}
+		Address address = (Address) obj;
+		if (!this.street.equals(address.getStreet())) {
+			return false;
+		}
+		if (!this.houseNumber.equals(address.getHouseNumber())) {
+			return false;
+		}
+		if (!this.postalCode.equals(address.getPostalCode())) {
+			return false;
+		}
+		if (!this.place.equals(address.getPlace())) {
+			return false;
+		}
+		if (!this.country.equals(address.getCountry())) {
+			return false;
+		}
+		return true;
+	}
+
 }

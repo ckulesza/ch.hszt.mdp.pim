@@ -4,6 +4,9 @@
 package ch.hszt.mdp.pim.exceptions;
 
 /**
+ * An exception to be thrown when an exception occurs while writing or reading
+ * data to the persistence level. It has no special functions.
+ * 
  * @author Christof Kulesza
  * 
  */
