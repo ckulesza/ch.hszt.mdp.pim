@@ -107,6 +107,9 @@ public class Address implements Serializable, PropertyChangeListener {
 
 	@Override
 	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
 		if (!(obj instanceof Address)) {
 			return false;
 		}

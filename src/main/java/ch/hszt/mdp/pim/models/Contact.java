@@ -251,6 +251,9 @@ public class Contact implements Serializable, PropertyChangeListener,
 
 	@Override
 	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
 		if (!(obj instanceof Contact)) {
 			return false;
 		}

@@ -32,7 +32,7 @@ public class ContactTest {
 		contact.setEmail("Email");
 		contact.setComment("Comment");
 		Address address = new Address();
-		contact.setAddress(address);
+		contact.setAddress(address);		
 		assertEquals("Id", 1, contact.getId());
 		assertEquals("Last name", "Last name", contact.getLastName());
 		assertEquals("First name", "First name", contact.getFirstName());
