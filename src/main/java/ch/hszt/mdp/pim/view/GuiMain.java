@@ -74,18 +74,18 @@ public class GuiMain {
 	private JFrame frame = new JFrame("PIM-Viewer "+VERSION);
 
 	private String[] s = new String[]{"Gruppe", "Vorname", "Name", "Geburtsdatum", 
-									  "eMail", "URL", "Telefonnr.", 
-									  "Job", 
-									  "Adresse"};
+			"eMail", "URL", "Telefonnr.", 
+			"Job", 
+	"Adresse"};
 	private JTextField[] tf = new JTextField[s.length];
-	
+
 	private String[] adressString = new String[] {"Strasse" , 
-												  "Nr.", 
-												  "ZIP",
-												  "Stadt",
-												  "Land"};
+			"Nr.", 
+			"ZIP",
+			"Stadt",
+	"Land"};
 	private JTextField[] addressFields = new JTextField[adressString.length];
-	
+
 	private Contact editPerson = new Contact();
 	private int listIndex;
 
@@ -121,7 +121,7 @@ public class GuiMain {
 		JPanel rightUpperPanel = new JPanel();
 		JPanel rightLowerPanel = new JPanel();
 		JPanel leftLowerPanel = new JPanel();
-	
+
 		saveContactButton.setEnabled(false);
 		editContactButton.setEnabled(false);
 		cancelContactButton.setEnabled(false);
@@ -190,8 +190,8 @@ public class GuiMain {
 
 		addcomponents1(leftPanel, createList(), 	0, 0, 1, 0);
 		addcomponents1(leftPanel, leftLowerPanel,   0, 1, 1, 0);
-		
-		
+
+
 		addcomponents1(rightPanel, setAllPanels(), 0, 0, 0, 1);
 		addcomponents1(rightPanel, rightLowerPanel, 0, 1, 0, 1);
 
@@ -267,7 +267,7 @@ public class GuiMain {
 		addressFields[2].setText(editPerson.getAddress().getPostalCode());
 		addressFields[3].setText(editPerson.getAddress().getPlace());
 		addressFields[4].setText(editPerson.getAddress().getCountry());
-		
+
 		disableTextFields();
 	}
 
@@ -297,7 +297,7 @@ public class GuiMain {
 		editPerson.setFirstName(tf[1].getText());
 		editPerson.setLastName(tf[2].getText());
 		// Geburtsdatum fehlt noch editPerson.setUrl(tf[3].getText());
-		
+
 		if (!(validateEmailAdress(tf[4].getText()))) {
 			editPerson.setEmail(editPerson.getEmail());			
 		}
@@ -315,7 +315,7 @@ public class GuiMain {
 		address.setPlace(addressFields[3].getText());
 		address.setCountry(addressFields[4].getText());
 		editPerson.setAddress(address);
-		
+
 		contacts.remove(listIndex);
 		contacts.add(i, editPerson);
 	}
@@ -441,14 +441,35 @@ public class GuiMain {
 		panel.add(comp, gbc);
 	}
 
-	/**
-	 * Method to add labels to panels
-	 */
-	private void addJlables(JPanel panel, JLabel label, String value, Font font, int x, int y, int witdhx) {
+	private void addcomponents2(JPanel panel, Component comp,
+			int x, int y, 
+			int width,
+			double weightx, double weighty) {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = x;
 		gbc.gridy = y;
-		gbc.weightx = witdhx;
+		gbc.gridwidth = width;
+		gbc.weightx = weightx;
+		gbc.weighty = weighty;
+		gbc.fill = GridBagConstraints.BOTH;
+		panel.add(comp, gbc);
+	}
+
+	/**
+	 * Method to add labels to panels
+	 */
+
+	private void addJlables(JPanel panel, JLabel label, String value, Font font,
+			int x, int y,
+			int width,
+			double weightx,
+			double weighty) {
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = x;
+		gbc.gridy = y;
+		gbc.gridwidth = width;
+		gbc.weightx = weightx;
+		gbc.weighty = weighty;
 
 		gbc.fill = GridBagConstraints.BOTH;
 		label.setText(value);
@@ -479,7 +500,7 @@ public class GuiMain {
 		for (int i = 0; i < addressFields.length; i++) {
 			addressFields[i].setEditable(false);
 		}
-		
+
 		ta.setEditable(false);
 	}
 
@@ -506,7 +527,7 @@ public class GuiMain {
 	 * and add them to the arrylist
 	 */
 	public void setSomePerson() {
-		
+
 		Calendar datum1 = Calendar.getInstance();
 		datum1.set(1000, 1, 19);
 		c1.setBirthDate(datum1.getTime());
@@ -525,7 +546,7 @@ public class GuiMain {
 		address.setPostalCode("345345");
 		address.setPlace("Transilvaninen");
 		address.setCountry("Ungarn");
-		
+
 		Calendar datum2 = Calendar.getInstance();
 		datum2.set(1105, 11, 24);
 		c2.setBirthDate(datum2.getTime());
@@ -579,7 +600,7 @@ public class GuiMain {
 		address.setPostalCode("212331");
 		address.setPlace("Bibiland");
 		address.setCountry("Nirgendwo");
-		
+
 		Calendar datum5 = Calendar.getInstance();
 		datum5.set(1001, 05, 30);
 		c5.setBirthDate(datum5.getTime());
@@ -624,12 +645,12 @@ public class GuiMain {
 		JPanel jobPanel = new JPanel();
 		JPanel addressPanel = new JPanel();
 		JPanel notePanel = new JPanel();
-		
+
 		contatPanel.setBorder(BorderFactory.createTitledBorder(border, "Contact", 0, 0, boldFont, font_color));
 		jobPanel.setBorder(BorderFactory.createTitledBorder(border, "Job", 0, 0, boldFont, font_color));
 		addressPanel.setBorder(BorderFactory.createTitledBorder(border, "Addresse", 0, 0, boldFont, font_color));
 		notePanel.setBorder(BorderFactory.createTitledBorder(border, "Note", 0, 0, boldFont, font_color));
-		
+
 		panel.setLayout(new GridBagLayout());
 		contatPanel.setLayout(new GridBagLayout());
 		jobPanel.setLayout(new GridBagLayout());
@@ -638,35 +659,40 @@ public class GuiMain {
 
 		// add contact-textields to panel
 		for (int i = 0; i < 7; i++) {
-			addJlables(contatPanel, new JLabel(), s[i], boldFont, 0, i, 0);
-			addcomponents1(contatPanel, tf[i] = new JTextField(), 1, i, 1, 1);
+			addJlables(contatPanel, new JLabel(), s[i], boldFont, 1, i, 1, 0, 1);
+			addcomponents1(contatPanel, tf[i] = new JTextField(), 2, i, 1, 1);
 		}
 		// add job-textfield to panel
 		addcomponents1(jobPanel, tf[7] = new JTextField(), 1, 7, 1, 1);
-		
-		// add address-textfields for addressinfo to panel
-		addJlables(addressPanel, new JLabel(), adressString[0], boldFont, 0, 0, 0);
-		addJlables(addressPanel, new JLabel(), adressString[1], boldFont, 2, 0, 0);
-		addJlables(addressPanel, new JLabel(), adressString[2], boldFont, 0, 1, 0);
-		addJlables(addressPanel, new JLabel(), adressString[3], boldFont, 2, 1, 0);
-		addJlables(addressPanel, new JLabel(), adressString[4], boldFont, 0, 2, 0);
 
-		addcomponents1(addressPanel, addressFields[0] = new JTextField(), 1, 0, 5, 1);
-		addcomponents1(addressPanel, addressFields[1] = new JTextField(), 3, 0, 0, 1);
-		addcomponents1(addressPanel, addressFields[2] = new JTextField(), 1, 1, 0, 1);
-		addcomponents1(addressPanel, addressFields[3] = new JTextField(), 3, 1, 5, 1);
-		addcomponents1(addressPanel, addressFields[4] = new JTextField(), 1, 2, 5, 1);
-		
+		// add address-textfields for addressinfo to panel
+		// x, y, , gridtwidth, witdhx, widthy
+
+		addJlables(addressPanel, new JLabel(), adressString[0], boldFont, 0, 0, 1, 0.05, 0.5);		// street_label
+		addcomponents2(addressPanel, addressFields[0] = new JTextField(),  1, 0, 3, 100.0, 0.5);	// street
+
+		addJlables(addressPanel, new JLabel(), adressString[1], boldFont, 4, 0, 1, 0.05, 0.5);		// streetnumber_label
+		addcomponents2(addressPanel, addressFields[1] = new JTextField(),  5, 0, 1, 5.0, 0.5);		// streetnumber
+
+		addJlables(addressPanel, new JLabel(), adressString[2], boldFont, 0, 1, 1, 0.05, 0.5);		// zip_label
+		addcomponents2(addressPanel, addressFields[2] = new JTextField(),  1, 1, 1, 0.05, 0.5);		// zip
+
+		addJlables(addressPanel, new JLabel(), adressString[3], boldFont, 2, 1, 1, 0.05, 0.5);		// city_label
+		addcomponents2(addressPanel, addressFields[3] = new JTextField(),  3, 1, 3, 100.0, 0.5);	// city
+
+		addJlables(addressPanel, new JLabel(), adressString[4], boldFont, 0, 2, 1, 0.05, 0.5);		// country_label
+		addcomponents2(addressPanel, addressFields[4] = new JTextField(),  1, 2, 1, 100.0, 0.5);	// country
+
 		// setup the notefiled
-		addcomponents1(notePanel, ta, 1, 1, 1, 1);
-			
+		addcomponents2(notePanel, ta, 1, 1, 1, 1, 1);
+
 		// add all panels to mainpanel in numberd order
-		addcomponents1(panel, contatPanel, 0, 0, 1, 1);
-		addcomponents1(panel, jobPanel, 0, 1, 1, 1);
-		addcomponents1(panel, addressPanel, 0, 2, 1, 1);
-		addcomponents1(panel, notePanel, 0, 3, 1, 1);
-		
+		addcomponents1(panel, contatPanel, 0, 0, 1, 0);
+		addcomponents1(panel, jobPanel, 0, 1, 1, 0);
+		addcomponents1(panel, addressPanel, 0, 2, 1, 0);
+		addcomponents1(panel, notePanel, 0, 3, 1, 0);
+
 		return panel;
 	}
-	
+
 }
