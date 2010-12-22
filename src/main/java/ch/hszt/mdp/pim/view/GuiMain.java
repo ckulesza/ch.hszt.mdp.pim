@@ -56,13 +56,13 @@ public class GuiMain {
 	/**
 	 * This are all variables for the mainGui
 	 * 	 */
-	private static final String VERSION = "0.1.4-19.12.2010";
+	private static final String VERSION = "0.1.5-19.12.2010";
 	private static final boolean resizeFrame = true;
 	private static final Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 	private static final Color font_color = Color.BLUE;
 	private static final Font boldFont = new Font(Font.SANS_SERIF, Font.BOLD, 12);
 	private static final Border border = BorderFactory.createEtchedBorder();
-	private static final Dimension framesize = new Dimension(700,500 );
+	private static final Dimension framesize = new Dimension(700,525 );
 	private static final Color color = new Color(240, 240, 240);
 	private final JButton exitButton = new JButton("Exit");
 	private final JButton saveContactButton = new JButton("Save");
@@ -185,22 +185,22 @@ public class GuiMain {
 		rightUpperPanel.setLayout(new GridBagLayout());
 		rightLowerPanel.setLayout(new GridBagLayout());
 
-		addcomponents1(panel, leftPanel, 	0, 0, 0, 0);
-		addcomponents1(panel, rightPanel,  	0, 0, 0, 0);
+		addcomponents(panel, leftPanel, 	0, 0, 0, 0, 0);
+		addcomponents(panel, rightPanel,  	0, 0, 0, 0, 0);
 
-		addcomponents1(leftPanel, createList(), 	0, 0, 1, 0);
-		addcomponents1(leftPanel, leftLowerPanel,   0, 1, 1, 0);
+		addcomponents(leftPanel, createList(), 	   0, 0, 1, 1, 0);
+		addcomponents(leftPanel, leftLowerPanel,   0, 1, 1, 1, 0);
 
 
-		addcomponents1(rightPanel, setAllPanels(), 0, 0, 0, 1);
-		addcomponents1(rightPanel, rightLowerPanel, 0, 1, 0, 1);
+		addcomponents(rightPanel, setAllPanels(), 0, 0, 1, 0, 1);
+		addcomponents(rightPanel, rightLowerPanel, 0, 1, 1, 0, 1);
 
-		addcomponents1(leftLowerPanel, exitButton, 0, 0, 0, 0);
+		addcomponents(leftLowerPanel, exitButton, 0, 0, 1, 0, 0);
 
-		addcomponents1(rightLowerPanel, newContactButton, 		0, 0, 0, 0);
-		addcomponents1(rightLowerPanel, editContactButton, 		1, 0, 0, 0);
-		addcomponents1(rightLowerPanel, saveContactButton,		2, 0, 0, 0);
-		addcomponents1(rightLowerPanel, cancelContactButton, 	3, 0, 0, 0);
+		addcomponents(rightLowerPanel, newContactButton, 		0, 0, 1, 0, 0);
+		addcomponents(rightLowerPanel, editContactButton, 		1, 0, 1, 0, 0);
+		addcomponents(rightLowerPanel, saveContactButton,		2, 0, 1, 0, 0);
+		addcomponents(rightLowerPanel, cancelContactButton, 	3, 0, 1, 0, 0);
 
 		createMenu(frame);
 
@@ -431,26 +431,16 @@ public class GuiMain {
 	/**
 	 * Method to add components to panels
 	 */
-	private void addcomponents1(JPanel panel, Component comp, int x, int y, int witdhx, int witdhy) {
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.gridx = x;
-		gbc.gridy = y;
-		gbc.weightx = witdhx;
-		gbc.weighty = witdhy;
-		gbc.fill = GridBagConstraints.BOTH;
-		panel.add(comp, gbc);
-	}
-
-	private void addcomponents2(JPanel panel, Component comp,
-			int x, int y, 
-			int width,
-			double weightx, double weighty) {
+	private void addcomponents(JPanel panel, Component comp,
+								int x, int y,
+								int width,
+								double witdhx, double witdhy) {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = x;
 		gbc.gridy = y;
 		gbc.gridwidth = width;
-		gbc.weightx = weightx;
-		gbc.weighty = weighty;
+		gbc.weightx = witdhx;
+		gbc.weighty = witdhy;
 		gbc.fill = GridBagConstraints.BOTH;
 		panel.add(comp, gbc);
 	}
@@ -458,7 +448,6 @@ public class GuiMain {
 	/**
 	 * Method to add labels to panels
 	 */
-
 	private void addJlables(JPanel panel, JLabel label, String value, Font font,
 			int x, int y,
 			int width,
@@ -660,37 +649,37 @@ public class GuiMain {
 		// add contact-textields to panel
 		for (int i = 0; i < 7; i++) {
 			addJlables(contatPanel, new JLabel(), s[i], boldFont, 1, i, 1, 0, 1);
-			addcomponents1(contatPanel, tf[i] = new JTextField(), 2, i, 1, 1);
+			addcomponents(contatPanel, tf[i] = new JTextField(), 2, i, 1, 1, 1);
 		}
 		// add job-textfield to panel
-		addcomponents1(jobPanel, tf[7] = new JTextField(), 1, 7, 1, 1);
+		addcomponents(jobPanel, tf[7] = new JTextField(), 1, 7, 1, 1, 1);
 
 		// add address-textfields for addressinfo to panel
 		// x, y, , gridtwidth, witdhx, widthy
 
 		addJlables(addressPanel, new JLabel(), adressString[0], boldFont, 0, 0, 1, 0.05, 0.5);		// street_label
-		addcomponents2(addressPanel, addressFields[0] = new JTextField(),  1, 0, 3, 100.0, 0.5);	// street
+		addcomponents(addressPanel, addressFields[0] = new JTextField(),  1, 0, 3, 100.0, 0.5);		// street
 
 		addJlables(addressPanel, new JLabel(), adressString[1], boldFont, 4, 0, 1, 0.05, 0.5);		// streetnumber_label
-		addcomponents2(addressPanel, addressFields[1] = new JTextField(),  5, 0, 1, 5.0, 0.5);		// streetnumber
+		addcomponents(addressPanel, addressFields[1] = new JTextField(),  5, 0, 1, 5.0, 0.5);		// streetnumber
 
 		addJlables(addressPanel, new JLabel(), adressString[2], boldFont, 0, 1, 1, 0.05, 0.5);		// zip_label
-		addcomponents2(addressPanel, addressFields[2] = new JTextField(),  1, 1, 1, 0.05, 0.5);		// zip
+		addcomponents(addressPanel, addressFields[2] = new JTextField(),  1, 1, 1, 0.05, 0.5);		// zip
 
 		addJlables(addressPanel, new JLabel(), adressString[3], boldFont, 2, 1, 1, 0.05, 0.5);		// city_label
-		addcomponents2(addressPanel, addressFields[3] = new JTextField(),  3, 1, 3, 100.0, 0.5);	// city
+		addcomponents(addressPanel, addressFields[3] = new JTextField(),  3, 1, 3, 100.0, 0.5);		// city
 
 		addJlables(addressPanel, new JLabel(), adressString[4], boldFont, 0, 2, 1, 0.05, 0.5);		// country_label
-		addcomponents2(addressPanel, addressFields[4] = new JTextField(),  1, 2, 1, 100.0, 0.5);	// country
+		addcomponents(addressPanel, addressFields[4] = new JTextField(),  1, 2, 1, 100.0, 0.5);		// country
 
 		// setup the notefiled
-		addcomponents2(notePanel, ta, 1, 1, 1, 1, 1);
+		addcomponents(notePanel, ta, 1, 2, 1, 1, 1);
 
 		// add all panels to mainpanel in numberd order
-		addcomponents1(panel, contatPanel, 0, 0, 1, 0);
-		addcomponents1(panel, jobPanel, 0, 1, 1, 0);
-		addcomponents1(panel, addressPanel, 0, 2, 1, 0);
-		addcomponents1(panel, notePanel, 0, 3, 1, 0);
+		addcomponents(panel, contatPanel, 0, 0, 1, 1, 0);
+		addcomponents(panel, jobPanel, 0, 1, 1, 1, 0);
+		addcomponents(panel, addressPanel, 0, 2, 1, 1, 0);
+		addcomponents(panel, notePanel, 0, 3, 1, 1, 0);
 
 		return panel;
 	}
