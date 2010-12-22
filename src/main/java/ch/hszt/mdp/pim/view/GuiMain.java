@@ -1,6 +1,5 @@
 package ch.hszt.mdp.pim.view;
 
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -186,21 +185,6 @@ public class GuiMain {
 		rightUpperPanel.setLayout(new GridBagLayout());
 		rightLowerPanel.setLayout(new GridBagLayout());
 
-		
-//		ta.setLineWrap(false);
-//		ta.setRows(3);
-//		ta.setColumns(2);
-//		
-//		for (int i = 0; i < s.length; i++) {
-//			if (s[i].equals("Adresse")) {
-//				addJlables(rightUpperPanel, new JLabel(), s[i], boldFont, 0, i, 0);			
-//				addcomponents1(rightUpperPanel, ta, 1, i, 1, 1);
-//			}
-//			addJlables(rightUpperPanel, new JLabel(), s[i], boldFont, 0, i, 0);
-//			tf[i] = new JTextField(); 
-//			addcomponents1(rightUpperPanel, tf[i], 1, i, 1, 1);
-//		}
-
 		addcomponents1(panel, leftPanel, 	0, 0, 0, 0);
 		addcomponents1(panel, rightPanel,  	0, 0, 0, 0);
 
@@ -209,7 +193,6 @@ public class GuiMain {
 		
 		
 		addcomponents1(rightPanel, setAllPanels(), 0, 0, 0, 1);
-//		addcomponents1(rightPanel, rightUpperPanel, 0, 0, 0, 1);
 		addcomponents1(rightPanel, rightLowerPanel, 0, 1, 0, 1);
 
 		addcomponents1(leftLowerPanel, exitButton, 0, 0, 0, 0);
@@ -300,8 +283,6 @@ public class GuiMain {
 		for (int i = 0; i < addressFields.length; i++) {
 			addressFields[i].setText(addressFields[i].getText());
 		}
-		
-//		ta.setText(ta.getText());
 	}
 
 	/**
@@ -339,6 +320,9 @@ public class GuiMain {
 		contacts.add(i, editPerson);
 	}
 
+	/**
+	 * Method to add new Person
+	 */
 	private void addNewPerson() {
 		Contact newPerson = new Contact();
 		this.listIndex = contacts.size();
@@ -387,6 +371,7 @@ public class GuiMain {
 		entry.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, SHORTCUT_MASK));
 		entry.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { 
+				@SuppressWarnings("unused")
 				DataSoureSelectionGui ds = new DataSoureSelectionGui(dataSource);
 			}
 		});
@@ -540,8 +525,6 @@ public class GuiMain {
 		address.setPostalCode("345345");
 		address.setPlace("Transilvaninen");
 		address.setCountry("Ungarn");
-		
-		
 		
 		Calendar datum2 = Calendar.getInstance();
 		datum2.set(1105, 11, 24);
