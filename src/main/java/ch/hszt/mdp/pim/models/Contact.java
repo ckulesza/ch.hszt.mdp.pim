@@ -28,6 +28,7 @@ public class Contact implements Serializable, PropertyChangeListener,
 	private String comment;
 	private String job;
 	private String group;
+	private String info;
 	private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(
 			this);
 
@@ -247,6 +248,20 @@ public class Contact implements Serializable, PropertyChangeListener,
 		String s = this.firstName + " " + this.lastName + " [" + this.group
 				+ "]";
 		return s;
+	}
+	/**
+	 * add info for each contact
+	 * @param info
+	 */
+	public void setInfo(String info) {
+		this.info = info;
+	}
+	
+	/**
+	 * @return info from contact
+	 */
+	public String getInfo() {
+		return info;
 	}
 
 	@Override

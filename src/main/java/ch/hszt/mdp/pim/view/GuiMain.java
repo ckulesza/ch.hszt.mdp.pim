@@ -268,6 +268,8 @@ public class GuiMain {
 		addressFields[3].setText(editPerson.getAddress().getPlace());
 		addressFields[4].setText(editPerson.getAddress().getCountry());
 
+		ta.setText(editPerson.getInfo());
+		
 		disableTextFields();
 	}
 
@@ -283,6 +285,7 @@ public class GuiMain {
 		for (int i = 0; i < addressFields.length; i++) {
 			addressFields[i].setText(addressFields[i].getText());
 		}
+		ta.setText(ta.getText());
 	}
 
 	/**
@@ -315,7 +318,9 @@ public class GuiMain {
 		address.setPlace(addressFields[3].getText());
 		address.setCountry(addressFields[4].getText());
 		editPerson.setAddress(address);
-
+		
+		editPerson.setInfo(ta.getText());
+		
 		contacts.remove(listIndex);
 		contacts.add(i, editPerson);
 	}
@@ -535,6 +540,7 @@ public class GuiMain {
 		address.setPostalCode("345345");
 		address.setPlace("Transilvaninen");
 		address.setCountry("Ungarn");
+		c1.setInfo("Das ist eine \nInfo\nfuer\ndie\nerste\nPerson");
 
 		Calendar datum2 = Calendar.getInstance();
 		datum2.set(1105, 11, 24);
@@ -673,7 +679,8 @@ public class GuiMain {
 		addcomponents(addressPanel, addressFields[4] = new JTextField(),  1, 2, 1, 100.0, 0.5);		// country
 
 		// setup the notefiled
-		addcomponents(notePanel, ta, 1, 2, 1, 1, 1);
+		JScrollPane sp = new JScrollPane(ta);
+		addcomponents(notePanel, sp, 1, 2, 1, 1, 1);
 
 		// add all panels to mainpanel in numberd order
 		addcomponents(panel, contatPanel, 0, 0, 1, 1, 0);
