@@ -9,6 +9,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import ch.hszt.mdp.pim.daos.IContactDAO;
 import ch.hszt.mdp.pim.daos.SerializeContactDAO;
 import ch.hszt.mdp.pim.models.Contact;
 import ch.hszt.mdp.pim.view.GuiMain;
@@ -21,7 +22,7 @@ public class Controller implements ActionListener{
 	
 	private List<Contact> contacts = new ArrayList<Contact>();
 	private GuiMain view = new GuiMain();
-	private SerializeContactDAO serial = new SerializeContactDAO();
+	private IContactDAO serial = new SerializeContactDAO();
 	
 
 	
