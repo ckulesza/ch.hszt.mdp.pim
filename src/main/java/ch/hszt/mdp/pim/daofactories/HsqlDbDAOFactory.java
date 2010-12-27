@@ -2,7 +2,6 @@ package ch.hszt.mdp.pim.daofactories;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -55,48 +54,6 @@ public class HsqlDbDAOFactory extends DAOFactory {
 		openConnection().close();
 	}
 	
-	/**
-	 * Die Methode wird nur fuer SELECT-Statement verwendet. Sie nimmt ein
-	 * SQL-Statement entgegen Und gibt einen ResultSet zurueck
-	 * 
-	 * @param expression
-	 * @return ResultSet
-	 * @throws SQLException
-	 */
-	public static ResultSet query(String expression) {
-		Statement st = null;
-		ResultSet rs = null;
-		
-		try {
-			st = openConnection().createStatement();
-			rs = st.executeQuery(expression); // query ausfuehren
-			st.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return rs;
-	}
-
-	/**
-	 * Diese Methode wird fuer folgende Statements verwendet: - CREATE - DROP -
-	 * INSERT - UPDATE Sie nimmt ein SQL-Statement entgegen und hat keinen
-	 * Return-Wert
-	 * 
-	 * @param expression
-	 * @throws SQLException
-	 */
-	public static void update(String expression){
-		Statement st;
-		try {
-			st = openConnection().createStatement();
-			st.executeUpdate(expression); // query ausfuehren
-			st.close();
-		} catch (SQLException e) {
-			System.out.println("Falsche Datenbank-Abfrage: " + expression);
-			e.printStackTrace();
-		}
-	}
-
 	@Override
 	public IContactDAO getCustomerDAO() {
 		return new HsqlDbIContactDAO();
