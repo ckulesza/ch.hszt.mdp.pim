@@ -45,10 +45,9 @@ public class HsqlDbIContactDAO implements IContactDAO {
 			c.setCountry(rs.getNString("cAddCountry"));
 			c.setComment(rs.getNString("cNotes"));			
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
+		} catch (Exception e) {
+			throw new DataAccessException();
+		}		
 		return c;
 	}
 
@@ -86,43 +85,113 @@ public class HsqlDbIContactDAO implements IContactDAO {
 				//add object to list
 				contactList.add(c);
 			}			
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			throw new DataAccessException();
 		}
 		return contactList;
 	}
 
 	@Override
 	public int insertContact(Contact contact) throws DataAccessException {
-		return 0;
+		int retCodeSt = 0;
+		try {
+			Statement st = HsqlDbDAOFactory.openConnection().createStatement();
+			retCodeSt    = st.executeUpdate(SqlStatements.insertContact(contact));
+			st.close();
+		} catch (Exception e) {
+			throw new DataAccessException();
+		}
+		return retCodeSt;
 	}
 
 	@Override
 	public int insertContacts(List<Contact> contacts)
 			throws DataAccessException {
-		return 0;
-	}
-
-	@Override
-	public boolean updateContact(Contact contact) throws DataAccessException {
-		return false;
-	}
-
-	@Override
-	public void updateContacts(List<Contact> contacts)
-			throws DataAccessException {
 		
+		int retCodeSt = 0;		
+		try {
+			for ( int i=0 ; i < contacts.size() ; i++ ) {
+				Statement st = HsqlDbDAOFactory.openConnection().createStatement();
+				retCodeSt    = st.executeUpdate(SqlStatements.insertContact(contacts.get(i)));
+				st.close();
+				//falls fehler auftreten soll die for-schleife abgebrochen werden
+				if(retCodeSt == -1) {
+					break;
+				}
+			}
+		} catch (Exception e) {
+			throw new DataAccessException();
+		}
+		
+		return retCodeSt;
 	}
 
 	@Override
-	public boolean deleteContact(Contact contact) throws DataAccessException {
-		return false;
+	public int updateContact(Contact contact) throws DataAccessException {
+		int retCodeSt = 0;
+		try {
+			Statement st = HsqlDbDAOFactory.openConnection().createStatement();
+			retCodeSt    = st.executeUpdate(SqlStatements.updateContact(contact));
+			st.close();
+		} catch (Exception e) {
+			throw new DataAccessException();
+		}
+		return retCodeSt;
 	}
 
 	@Override
-	public boolean deleteContacts(List<Contact> contact)
+	public int updateContacts(List<Contact> contacts)
 			throws DataAccessException {
-		return false;
+		int retCodeSt = 0;		
+		try {
+			for ( int i=0 ; i < contacts.size() ; i++ ) {
+				Statement st = HsqlDbDAOFactory.openConnection().createStatement();
+				retCodeSt    = st.executeUpdate(SqlStatements.updateContact(contacts.get(i)));
+				st.close();
+				//falls fehler auftreten soll die for-schleife abgebrochen werden
+				if(retCodeSt == -1) {
+					break;
+				}
+			}
+		} catch (Exception e) {
+			throw new DataAccessException();
+		}
+		
+		return retCodeSt;
+	}
+
+	@Override
+	public int deleteContact(Contact contact) throws DataAccessException {
+		int retCodeSt = 0;
+		try {
+			Statement st = HsqlDbDAOFactory.openConnection().createStatement();
+			retCodeSt    = st.executeUpdate(SqlStatements.deleteContact(contact));
+			st.close();
+		} catch (Exception e) {
+			throw new DataAccessException();
+		}
+		return retCodeSt;
+	}
+
+	@Override
+	public int deleteContacts(List<Contact> contacts)
+			throws DataAccessException {
+		int retCodeSt = 0;		
+		try {
+			for ( int i=0 ; i < contacts.size() ; i++ ) {
+				Statement st = HsqlDbDAOFactory.openConnection().createStatement();
+				retCodeSt    = st.executeUpdate(SqlStatements.deleteContact(contacts.get(i)));
+				st.close();
+				//falls fehler auftreten soll die for-schleife abgebrochen werden
+				if(retCodeSt == -1) {
+					break;
+				}
+			}
+		} catch (Exception e) {
+			throw new DataAccessException();
+		}
+		
+		return retCodeSt;
 	}
 
 }
