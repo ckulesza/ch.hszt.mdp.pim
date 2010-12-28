@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import ch.hszt.mdp.pim.daos.HsqlDbIContactDAO;
+import ch.hszt.mdp.pim.daos.HsqlDbContactDAO;
 import ch.hszt.mdp.pim.daos.IContactDAO;
 
 /**
@@ -56,7 +56,7 @@ public class HsqlDbDAOFactory extends DAOFactory {
 	
 	@Override
 	public IContactDAO getCustomerDAO() {
-		return new HsqlDbIContactDAO();
+		return new HsqlDbContactDAO();
 	}
 
 	@Override

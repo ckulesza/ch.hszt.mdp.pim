@@ -16,7 +16,7 @@ import ch.hszt.mdp.pim.models.Contact;
  * @author Ramy Hasan
  *
  */
-public class HsqlDbIContactDAO implements IContactDAO {
+public class HsqlDbContactDAO implements IContactDAO {
 	
 	@Override
 	public Contact loadContactById(long id) throws DataAccessException {
