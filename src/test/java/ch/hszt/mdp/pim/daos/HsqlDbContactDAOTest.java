@@ -11,7 +11,7 @@ import org.junit.Test;
  * @author Ramy Hasan
  *
  */
-public class HsqlDbIContactDAOTest {
+public class HsqlDbContactDAOTest {
 
 	/**
 	 * Test method for {@link ch.hszt.mdp.pim.daos.HsqlDbContactDAO#loadContactById(long)}.
