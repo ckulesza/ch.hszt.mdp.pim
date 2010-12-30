@@ -8,11 +8,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -42,22 +40,20 @@ public class GuiMain {
 	/**
 	 * This are all variables for the mainGui
 	 * */
-	private static final String VERSION = "0.1.5-19.12.2010";
-	private static final boolean resizeFrame = true;
-	private static final Dimension d = Toolkit.getDefaultToolkit()
-			.getScreenSize();
-	private static final Color font_color = Color.BLUE;
-	private static final Font boldFont = new Font(Font.SANS_SERIF, Font.BOLD,
-			12);
-	private static final Border border = BorderFactory.createEtchedBorder();
-	private static final Dimension framesize = new Dimension(700, 525);
-	private static final Color color = new Color(240, 240, 240);
-	private final JButton exitButton = new JButton("Exit");
-	private final JButton saveContactButton = new JButton("Save");
-	private final JButton cancelContactButton = new JButton("Cancel");
-	private final JButton editContactButton = new JButton("Edit");
-	private final JButton newContactButton = new JButton("New Contact");
-	private final String[][] dataSource = new String[4][2];
+	private static String VERSION = "0.1.5-19.12.2010";
+	private static boolean resizeFrame = true;
+	private static Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+	private static Color font_color = Color.BLUE;
+	private static Font boldFont = new Font(Font.SANS_SERIF, Font.BOLD, 12);
+	private static Border border = BorderFactory.createEtchedBorder();
+	private static Dimension framesize = new Dimension(700, 525);
+	private static Color color = new Color(240, 240, 240);
+	private JButton exitButton = new JButton("Exit");
+	private JButton saveContactButton = new JButton("Save");
+	private JButton cancelContactButton = new JButton("Cancel");
+	private JButton editContactButton = new JButton("Edit");
+	private JButton newContactButton = new JButton("New Contact");
+	private String[][] dataSource = new String[4][2];
 	private JTextArea ta = new JTextArea(3, 20);
 	private JFrame frame = new JFrame("PIM-Viewer " + VERSION);
 
@@ -72,17 +68,26 @@ public class GuiMain {
 	private Contact editPerson = new Contact();
 	private int listIndex;
 
+	private JMenu menu = new JMenu("File");
+	private JMenuItem exitMenuItem = new JMenuItem("Exit");
+	private JMenuItem sourceMenuItem = new JMenuItem("Select Data Source");
+	private JMenuItem aboutMenuItem = new JMenuItem("About");
+	private JMenuBar menuBar = new JMenuBar();
+
 	/**
 	 * method to add ActionListener passed by Controller to buttons
 	 * 
 	 * @param al
 	 */
-	public void buttonActionListeners(ActionListener al) {
+	public void ActionListeners(ActionListener al) {
 		exitButton.addActionListener(al);
 		saveContactButton.addActionListener(al);
 		editContactButton.addActionListener(al);
 		cancelContactButton.addActionListener(al);
 		newContactButton.addActionListener(al);
+		exitMenuItem.addActionListener(al);
+		sourceMenuItem.addActionListener(al);
+		aboutMenuItem.addActionListener(al);
 	}
 
 	/**
@@ -181,38 +186,20 @@ public class GuiMain {
 	public void createMenu(JFrame fenster) {
 		final int SHORTCUT_MASK = Toolkit.getDefaultToolkit()
 				.getMenuShortcutKeyMask();
-		JMenuBar menuezeile = new JMenuBar();
-		fenster.setJMenuBar(menuezeile);
-
-		JMenu menu;
-		JMenuItem entry;
-
-		menu = new JMenu("File");
-		menuezeile.add(menu);
-		entry = new JMenuItem("Exit");
-		entry.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
+		fenster.setJMenuBar(menuBar);
+		menuBar.add(menu);
+		exitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
 				SHORTCUT_MASK));
-
-		menu.add(entry);
-
-		entry = new JMenuItem("Select Data Source");
-		entry.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
+		menu.add(exitMenuItem);
+		sourceMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
 				SHORTCUT_MASK));
-		entry.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				@SuppressWarnings("unused")
-				DataSoureSelectionGui ds = new DataSoureSelectionGui(dataSource);
-			}
-		});
-		menu.add(entry);
-
-		menu = new JMenu("Help");
-		menuezeile.add(menu);
-
-		entry = new JMenuItem("About PIM");
-		entry.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
+		menu.add(sourceMenuItem);
+		 menu = new JMenu("Help");
+		 menuBar.add(menu);
+		aboutMenuItem = new JMenuItem("About PIM");
+		aboutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,
 				SHORTCUT_MASK));
-		menu.add(entry);
+		menu.add(aboutMenuItem);
 	}
 
 	/**
@@ -369,7 +356,6 @@ public class GuiMain {
 		for (int i = 0; i < addressFields.length; i++) {
 			addressFields[i].setEditable(false);
 		}
-
 		ta.setEditable(false);
 	}
 
@@ -417,9 +403,24 @@ public class GuiMain {
 		// view.disableTextFields();
 		// view.setData(editPerson);
 		// }
+		enableTextFields();
 		newContactButton.setEnabled(true);
 		saveContactButton.setEnabled(false);
 		cancelContactButton.setEnabled(false);
+	}
+
+	/**
+	 * @return Returns the TextField values to the controller
+	 */
+	public JTextField[] getTextFields() {
+		return tf;
+	}
+
+	/**
+	 * @return Returns the AddressFields values to the controller
+	 */
+	public JTextField[] getAddressFields() {
+		return addressFields;
 	}
 
 }
