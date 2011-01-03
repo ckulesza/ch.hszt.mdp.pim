@@ -8,3 +8,6 @@ target/
 /target
 /README.md
 /doc
+./pimdb.log
+./pimdb.properties
+./pimdb.script
