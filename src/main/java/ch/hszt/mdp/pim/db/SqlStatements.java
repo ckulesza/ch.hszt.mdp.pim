@@ -19,13 +19,20 @@ public class SqlStatements {
 				", cBirthday, cEmail, cUrl, cTel, cJob, cAddStreet" +
 				", cAddStreetNo, cAddZip, cAddCity, cAddCountry, cNotes) " +
 				
-				" VALUES( '" + c.getGroup() + "','" + c.getFirstName() + "'" +
-						",'" + c.getLastName() + "','" + c.getBirthDate() + "'" +
-						",'" + c.getEmail() + "','" + c.getUrl() + "'" +
-						",'" + c.getTelephone() + "','" + c.getJob() + "'" +
-						",'" + c.getStreet()+ "','" + c.getStreetNo() + "'" +
-						",'" + c.getZip() + "','" + c.getCity() + "'" +
-						",'" + c.getCountry() + "','" + c.getComment() + "' ) ";
+				" VALUES( '" + c.getGroup() + "'" +
+						",'" + c.getFirstName() + "'" +
+						",'" + c.getLastName() + "'" +
+						",'" + c.getBirthDate() + "'" +
+						",'" + c.getEmail() + "'" +
+						",'" + c.getUrl() + "'" +
+						",'" + c.getTelephone() + "'" +
+						",'" + c.getJob() + "'" +
+						",'" + c.getAddress().getStreet()+ "'" +
+						",'" + c.getAddress().getHouseNumber() + "'" +
+						",'" + c.getAddress().getPostalCode() + "'" +
+						",'" + c.getAddress().getPlace() + "'" +
+						",'" + c.getAddress().getCountry() + "'" +
+						",'" + c.getComment() + "' ) ";
 	}
 	
 	public static String updateContact(Contact c) {
@@ -38,11 +45,11 @@ public class SqlStatements {
 						", cUrl = '" + c.getUrl() + "'" +
 						", cTel = '" + c.getTelephone() + "'" +
 						", cJob = '" + c.getJob() + "'" +
-						", cAddStreet = '" + c.getStreet() + "'" +
-						", cAddStreetNo = '" + c.getStreetNo() + "'" +
-						", cAddZip = '" + c.getZip() + "'" +
-						", cAddCity = '" + c.getCity() + "'" +
-						", cAddCountry = '" + c.getCountry() + "'" +
+						", cAddStreet = '" + c.getAddress().getStreet() + "'" +
+						", cAddStreetNo = '" + c.getAddress().getHouseNumber() + "'" +
+						", cAddZip = '" + c.getAddress().getPostalCode() + "'" +
+						", cAddCity = '" + c.getAddress().getPlace() + "'" +
+						", cAddCountry = '" + c.getAddress().getCountry() + "'" +
 						", cNotes = '" + c.getComment() + "'" +
 				"WHERE cId = " + c.getId();
 	}

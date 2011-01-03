@@ -38,13 +38,12 @@ public class HsqlDbContactDAO implements IContactDAO {
 			c.setUrl(rs.getNString("cUrl"));
 			c.setTelephone(rs.getNString("cTel"));
 			c.setJob(rs.getNString("cJob"));
-			c.setStreet(rs.getNString("cAddStreet"));
-			c.setStreetNo(rs.getNString("cAddStreetNo"));
-			c.setZip(rs.getNString("cAddZip"));
-			c.setCity(rs.getNString("cAddCity"));
-			c.setCountry(rs.getNString("cAddCountry"));
+			c.getAddress().setStreet(rs.getNString("cAddStreet"));
+			c.getAddress().setHouseNumber(rs.getNString("cAddStreetNo"));
+			c.getAddress().setPostalCode(rs.getNString("cAddZip"));
+			c.getAddress().setPlace(rs.getNString("cAddCity"));
+			c.getAddress().setCountry(rs.getNString("cAddCountry"));
 			c.setComment(rs.getNString("cNotes"));			
-			
 		} catch (Exception e) {
 			throw new DataAccessException();
 		}		
@@ -75,11 +74,11 @@ public class HsqlDbContactDAO implements IContactDAO {
 				c.setUrl(rs.getNString("cUrl"));
 				c.setTelephone(rs.getNString("cTel"));
 				c.setJob(rs.getNString("cJob"));
-				c.setStreet(rs.getNString("cAddStreet"));
-				c.setStreetNo(rs.getNString("cAddStreetNo"));
-				c.setZip(rs.getNString("cAddZip"));
-				c.setCity(rs.getNString("cAddCity"));
-				c.setCountry(rs.getNString("cAddCountry"));
+				c.getAddress().setStreet(rs.getNString("cAddStreet"));
+				c.getAddress().setHouseNumber(rs.getNString("cAddStreetNo"));
+				c.getAddress().setPostalCode(rs.getNString("cAddZip"));
+				c.getAddress().setPlace(rs.getNString("cAddCity"));
+				c.getAddress().setCountry(rs.getNString("cAddCountry"));
 				c.setComment(rs.getNString("cNotes"));
 				
 				//add object to list
