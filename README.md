@@ -11,7 +11,7 @@ Beim Commiten darauf achten, dass die eclipseprojektspezifischen Daten, die Giti
 * .gitignore
 * pimdb.log
 * pimdb.properties
-* pimdb.script 
+* pimdb.script
 
 Es werden jediglich die pom.xml, die README.txt und das src-Verzeichnis hochgeladen. (Navigator-Ansicht)
 
