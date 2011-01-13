@@ -40,7 +40,7 @@ public class GuiMain {
 	/**
 	 * This are all variables for the mainGui
 	 * */
-	private static String VERSION = "0.1.5-19.12.2010";
+	private static String VERSION = "0.1.5-14.01.2011";
 	private static boolean resizeFrame = true;
 	private static Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 	private static Color font_color = Color.BLUE;
@@ -193,6 +193,7 @@ public class GuiMain {
 		menu.add(exitMenuItem);
 		sourceMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
 				SHORTCUT_MASK));
+		sourceMenuItem.setEnabled(false);
 		menu.add(sourceMenuItem);
 		 menu = new JMenu("Help");
 		 menuBar.add(menu);
