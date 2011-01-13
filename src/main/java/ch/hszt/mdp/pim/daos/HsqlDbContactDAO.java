@@ -11,12 +11,20 @@ import ch.hszt.mdp.pim.exceptions.DataAccessException;
 import ch.hszt.mdp.pim.models.Contact;
 
 /**
+ * Die Klasse implementiert das Interface IContactDAO
+ * Diese Klasse verwendet die HSQLDB. Hier werden die Insert-,
+ * die Update- und die Delete- Methoden implementiert.
  * 
  * @author Ramy Hasan
  *
  */
 public class HsqlDbContactDAO implements IContactDAO {
 	
+	/**
+	 * Diese Methode lädt eines Kontakts anhand eines Kontakt-Ids
+	 * @param id
+	 * @return c Contact object
+	 */
 	@Override
 	public Contact loadContactById(long id) throws DataAccessException {
 		Contact c = new Contact();
@@ -49,6 +57,12 @@ public class HsqlDbContactDAO implements IContactDAO {
 		return c;
 	}
 
+	/**
+	 * Diese Methode lädt alle Kontakte aus der Datenbank und gibt diese als
+	 * Konatkt-Liste zurück
+	 * 
+	 * @return List Contact
+	 */
 	@Override
 	public List<Contact> loadAllContacts() throws DataAccessException {
 		List<Contact> contactList = new ArrayList<Contact>();
@@ -89,6 +103,12 @@ public class HsqlDbContactDAO implements IContactDAO {
 		return contactList;
 	}
 
+	/**
+	 * Diese Methode fügt eines neuen Kontakts in der DB
+	 * 
+	 * @param contact Contact object
+	 * @return retCodeStr int
+	 */
 	@Override
 	public int insertContact(Contact contact) throws DataAccessException {
 		int retCodeSt = 0;
@@ -102,6 +122,12 @@ public class HsqlDbContactDAO implements IContactDAO {
 		return retCodeSt;
 	}
 
+	/**
+	 * Diese Methode kann mehrere Kontakte in der DB einfügen
+	 * 
+	 * @param List Contact
+	 * @return retCodeStr int
+	 */
 	@Override
 	public int insertContacts(List<Contact> contacts)
 			throws DataAccessException {
@@ -124,6 +150,12 @@ public class HsqlDbContactDAO implements IContactDAO {
 		return retCodeSt;
 	}
 
+	/**
+	 * Diese Methode ist fürs Updaten eines Kontakts zuständig
+	 * 
+	 * @param contact Contact object
+	 * @return retCodeSt int
+	 */
 	@Override
 	public boolean updateContact(Contact contact) throws DataAccessException {
 		int retCodeSt = 0;
@@ -141,6 +173,11 @@ public class HsqlDbContactDAO implements IContactDAO {
 		return true;
 	}
 
+	/**
+	 * Diese Methode updatet alle Konatkte aus dem List
+	 * 
+	 * @param List Contact
+	 */
 	@Override
 	public void updateContacts(List<Contact> contacts)
 			throws DataAccessException {
@@ -155,6 +192,12 @@ public class HsqlDbContactDAO implements IContactDAO {
 		}
 	}
 
+	/**
+	 * Diese Methode löscht ein Kontakt
+	 * 
+	 * @param contact Contact
+	 * @return boolean
+	 */
 	@Override
 	public boolean deleteContact(Contact contact) throws DataAccessException {
 		int retCodeSt = 0;
@@ -172,6 +215,12 @@ public class HsqlDbContactDAO implements IContactDAO {
 		return true;
 	}
 
+	/**
+	 * Diese Methode löscht mehrere Kontakte anhand der übergebene Liste
+	 * 
+	 * @param List Contact
+	 * @return boolean
+	 */
 	@Override
 	public boolean deleteContacts(List<Contact> contacts)
 			throws DataAccessException {

@@ -9,6 +9,9 @@ import ch.hszt.mdp.pim.daos.HsqlDbContactDAO;
 import ch.hszt.mdp.pim.daos.IContactDAO;
 
 /**
+ * Diese Klasse ist für die Verbindung der HSQLDB zuständig. Und bietet
+ * Methoden für die Info-Abfragen an.
+ * Hier wird das Singleton implementiert.
  * 
  * @author Ramy Hasan
  *
