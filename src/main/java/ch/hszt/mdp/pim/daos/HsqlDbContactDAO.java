@@ -1,7 +1,6 @@
 package ch.hszt.mdp.pim.daos;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -126,7 +125,7 @@ public class HsqlDbContactDAO implements IContactDAO {
 	}
 
 	@Override
-	public int updateContact(Contact contact) throws DataAccessException {
+	public boolean updateContact(Contact contact) throws DataAccessException {
 		int retCodeSt = 0;
 		try {
 			Statement st = HsqlDbDAOFactory.openConnection().createStatement();
@@ -135,32 +134,29 @@ public class HsqlDbContactDAO implements IContactDAO {
 		} catch (Exception e) {
 			throw new DataAccessException();
 		}
-		return retCodeSt;
+		
+		if(retCodeSt == 0) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
-	public int updateContacts(List<Contact> contacts)
+	public void updateContacts(List<Contact> contacts)
 			throws DataAccessException {
-		int retCodeSt = 0;		
 		try {
 			for ( int i=0 ; i < contacts.size() ; i++ ) {
 				Statement st = HsqlDbDAOFactory.openConnection().createStatement();
-				retCodeSt    = st.executeUpdate(SqlStatements.updateContact(contacts.get(i)));
+				st.executeUpdate(SqlStatements.updateContact(contacts.get(i)));
 				st.close();
-				//falls fehler auftreten soll die for-schleife abgebrochen werden
-				if(retCodeSt == -1) {
-					break;
-				}
 			}
 		} catch (Exception e) {
 			throw new DataAccessException();
 		}
-		
-		return retCodeSt;
 	}
 
 	@Override
-	public int deleteContact(Contact contact) throws DataAccessException {
+	public boolean deleteContact(Contact contact) throws DataAccessException {
 		int retCodeSt = 0;
 		try {
 			Statement st = HsqlDbDAOFactory.openConnection().createStatement();
@@ -169,11 +165,15 @@ public class HsqlDbContactDAO implements IContactDAO {
 		} catch (Exception e) {
 			throw new DataAccessException();
 		}
-		return retCodeSt;
+		
+		if(retCodeSt == 0) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
-	public int deleteContacts(List<Contact> contacts)
+	public boolean deleteContacts(List<Contact> contacts)
 			throws DataAccessException {
 		int retCodeSt = 0;		
 		try {
@@ -190,7 +190,10 @@ public class HsqlDbContactDAO implements IContactDAO {
 			throw new DataAccessException();
 		}
 		
-		return retCodeSt;
+		if(retCodeSt == 0) {
+			return false;
+		}
+		return true;
 	}
 
 }
