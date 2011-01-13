@@ -177,7 +177,7 @@ public class GuiMain {
 		return listScroller;
 	}
 
-	// TODO Evtl. Kontextmenü in andere Klasse, oder Items in Klasse.
+	// TODO Evtl. Kontextmenï¿½ in andere Klasse, oder Items in Klasse.
 	/**
 	 * Method to setup the window menu
 	 * 
