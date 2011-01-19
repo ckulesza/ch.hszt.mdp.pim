@@ -8,7 +8,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
@@ -29,8 +28,6 @@ import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 
-import ch.hszt.mdp.pim.models.Contact;
-
 /**
  * @author Egon Pfammatter & Marcel Nemeth
  * 
@@ -41,6 +38,7 @@ public class GuiMain {
 	 * This are all variables for the mainGui
 	 * */
 	private static String VERSION = "0.1.5-19.12.2010";
+
 	private static boolean resizeFrame = true;
 	private static Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 	private static Color font_color = Color.BLUE;
@@ -48,26 +46,33 @@ public class GuiMain {
 	private static Border border = BorderFactory.createEtchedBorder();
 	private static Dimension framesize = new Dimension(700, 525);
 	private static Color color = new Color(240, 240, 240);
-	private JButton exitButton = new JButton("Exit");
-	private JButton saveContactButton = new JButton("Save");
-	private JButton cancelContactButton = new JButton("Cancel");
-	private JButton editContactButton = new JButton("Edit");
-	private JButton newContactButton = new JButton("New Contact");
+	private JButton exitButton;
+	private JButton saveContactButton;
+	private JButton cancelContactButton;
+	private JButton editContactButton;
+	private JButton newContactButton;
+	private JTextArea ta;
+	private JFrame frame;
+	private JTextField groupTextField;
+	private JTextField firstnameTextField;
+	private JTextField lastnameTextField;
+	private JTextField dateofirthTextField;
+	private JTextField emailTextField;
+	private JTextField urlTextField;
+	private JTextField phonenumberTextField;
+	private JTextField jobTextField;
+	private JTextField addressTextField;
+	private JTextField streetTextField;
+	private JTextField streetnoTextField;
+	private JTextField zipTextField;
+	private JTextField cityTextField;
+	private JTextField countryTextField;
 	private String[][] dataSource = new String[4][2];
-	private JTextArea ta = new JTextArea(3, 20);
-	private JFrame frame = new JFrame("PIM-Viewer " + VERSION);
 
 	private String[] s = new String[] { "Gruppe", "Vorname", "Name",
 			"Geburtsdatum", "eMail", "URL", "Telefonnr.", "Job", "Adresse" };
-	private JTextField[] tf = new JTextField[s.length];
-
 	private String[] adressString = new String[] { "Strasse", "Nr.", "ZIP",
 			"Stadt", "Land" };
-	private JTextField[] addressFields = new JTextField[adressString.length];
-
-	private Contact editPerson = new Contact();
-	private int listIndex;
-
 	private JMenu menu = new JMenu("File");
 	private JMenuItem exitMenuItem = new JMenuItem("Exit");
 	private JMenuItem sourceMenuItem = new JMenuItem("Select Data Source");
@@ -75,27 +80,32 @@ public class GuiMain {
 	private JMenuBar menuBar = new JMenuBar();
 
 	/**
-	 * method to add ActionListener passed by Controller to buttons
-	 * 
-	 * @param al
-	 */
-	public void ActionListeners(ActionListener al) {
-		exitButton.addActionListener(al);
-		saveContactButton.addActionListener(al);
-		editContactButton.addActionListener(al);
-		cancelContactButton.addActionListener(al);
-		newContactButton.addActionListener(al);
-		exitMenuItem.addActionListener(al);
-		sourceMenuItem.addActionListener(al);
-		aboutMenuItem.addActionListener(al);
-	}
-
-	/**
 	 * this constructor is only required for test
 	 * 
 	 * @param guiControl
 	 */
 	public GuiMain() {
+		exitButton = new JButton("Exit");
+		saveContactButton = new JButton("Save");
+		cancelContactButton = new JButton("Cancel");
+		editContactButton = new JButton("Edit");
+		newContactButton = new JButton("New Contact");
+		groupTextField = new JTextField("Gruppe");
+		firstnameTextField = new JTextField("Vorname");
+		lastnameTextField = new JTextField("Name");
+		dateofirthTextField = new JTextField("Geburtstag");
+		emailTextField = new JTextField("eMail");
+		urlTextField = new JTextField("URL");
+		phonenumberTextField = new JTextField("Telefonnr");
+		jobTextField = new JTextField("Job");
+		addressTextField = new JTextField("Adresse");
+		streetTextField = new JTextField("Strasse");
+		streetnoTextField = new JTextField("Nr.");
+		zipTextField = new JTextField("ZIP");
+		cityTextField = new JTextField("Stadt");
+		countryTextField = new JTextField("Land");
+		ta = new JTextArea(3, 20);
+		frame = new JFrame("PIM-Viewer " + VERSION);
 		createWindow();
 	}
 
@@ -177,7 +187,6 @@ public class GuiMain {
 		return listScroller;
 	}
 
-	// TODO Evtl. Kontextmenü in andere Klasse, oder Items in Klasse.
 	/**
 	 * Method to setup the window menu
 	 * 
@@ -194,8 +203,8 @@ public class GuiMain {
 		sourceMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
 				SHORTCUT_MASK));
 		menu.add(sourceMenuItem);
-		 menu = new JMenu("Help");
-		 menuBar.add(menu);
+		menu = new JMenu("Help");
+		menuBar.add(menu);
 		aboutMenuItem = new JMenuItem("About PIM");
 		aboutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,
 				SHORTCUT_MASK));
@@ -285,40 +294,42 @@ public class GuiMain {
 		notePanel.setLayout(new GridBagLayout());
 
 		// add contact-textields to panel
+
 		for (int i = 0; i < 7; i++) {
 			addJlables(contatPanel, new JLabel(), s[i], boldFont, 1, i, 1, 0, 1);
-			addcomponents(contatPanel, tf[i] = new JTextField(), 2, i, 1, 1, 1);
 		}
-		// add job-textfield to panel
-		addcomponents(jobPanel, tf[7] = new JTextField(), 1, 7, 1, 1, 1);
+		addcomponents(contatPanel, groupTextField, 2, 0, 1, 1, 1);
+		addcomponents(contatPanel, firstnameTextField, 2, 1, 1, 1, 1);
+		addcomponents(contatPanel, lastnameTextField, 2, 2, 1, 1, 1);
+		addcomponents(contatPanel, dateofirthTextField, 2, 3, 1, 1, 1);
+		addcomponents(contatPanel, emailTextField, 2, 4, 1, 1, 1);
+		addcomponents(contatPanel, urlTextField, 2, 5, 1, 1, 1);
+		addcomponents(contatPanel, phonenumberTextField, 2, 6, 1, 1, 1);
+		addcomponents(contatPanel, jobTextField, 2, 7, 1, 1, 1);
+		addcomponents(contatPanel, addressTextField, 2, 8, 1, 1, 1);
 
 		// add address-textfields for addressinfo to panel
 		// x, y, , gridtwidth, witdhx, widthy
 
 		addJlables(addressPanel, new JLabel(), adressString[0], boldFont, 0, 0,
 				1, 0.05, 0.5); // street_label
-		addcomponents(addressPanel, addressFields[0] = new JTextField(), 1, 0,
-				3, 100.0, 0.5); // street
+		addcomponents(addressPanel, streetTextField, 1, 0, 3, 100.0, 0.5); // street
 
 		addJlables(addressPanel, new JLabel(), adressString[1], boldFont, 4, 0,
 				1, 0.05, 0.5); // streetnumber_label
-		addcomponents(addressPanel, addressFields[1] = new JTextField(), 5, 0,
-				1, 5.0, 0.5); // streetnumber
+		addcomponents(addressPanel, streetnoTextField, 5, 0, 1, 5.0, 0.5); // streetnumber
 
 		addJlables(addressPanel, new JLabel(), adressString[2], boldFont, 0, 1,
 				1, 0.05, 0.5); // zip_label
-		addcomponents(addressPanel, addressFields[2] = new JTextField(), 1, 1,
-				1, 0.05, 0.5); // zip
+		addcomponents(addressPanel, zipTextField, 1, 1, 1, 0.05, 0.5); // zip
 
 		addJlables(addressPanel, new JLabel(), adressString[3], boldFont, 2, 1,
 				1, 0.05, 0.5); // city_label
-		addcomponents(addressPanel, addressFields[3] = new JTextField(), 3, 1,
-				3, 100.0, 0.5); // city
+		addcomponents(addressPanel, cityTextField, 3, 1, 3, 100.0, 0.5); // city
 
 		addJlables(addressPanel, new JLabel(), adressString[4], boldFont, 0, 2,
 				1, 0.05, 0.5); // country_label
-		addcomponents(addressPanel, addressFields[4] = new JTextField(), 1, 2,
-				1, 100.0, 0.5); // country
+		addcomponents(addressPanel, countryTextField, 1, 2, 1, 100.0, 0.5); // country
 
 		// setup the notefiled
 		// JScrollPane sp = new JScrollPane(ta);
@@ -337,12 +348,20 @@ public class GuiMain {
 	 * Set textFields to edit mode
 	 */
 	private void enableTextFields() {
-		for (int i = 0; i < tf.length - 1; i++) {
-			tf[i].setEditable(true);
-		}
-		for (int i = 0; i < addressFields.length; i++) {
-			addressFields[i].setEditable(true);
-		}
+		groupTextField.setEditable(true);
+		firstnameTextField.setEditable(true);
+		lastnameTextField.setEditable(true);
+		dateofirthTextField.setEditable(true);
+		emailTextField.setEditable(true);
+		urlTextField.setEditable(true);
+		phonenumberTextField.setEditable(true);
+		jobTextField.setEditable(true);
+		addressTextField.setEditable(true);
+		streetTextField.setEditable(true);
+		streetnoTextField.setEditable(true);
+		zipTextField.setEditable(true);
+		cityTextField.setEditable(true);
+		countryTextField.setEditable(true);
 		ta.setEditable(true);
 	}
 
@@ -350,12 +369,21 @@ public class GuiMain {
 	 * unset textFields to edit mode
 	 */
 	private void disableTextFields() {
-		for (int i = 0; i < tf.length - 1; i++) {
-			tf[i].setEditable(false);
-		}
-		for (int i = 0; i < addressFields.length; i++) {
-			addressFields[i].setEditable(false);
-		}
+
+		groupTextField.setEditable(false);
+		firstnameTextField.setEditable(false);
+		lastnameTextField.setEditable(false);
+		dateofirthTextField.setEditable(false);
+		emailTextField.setEditable(false);
+		urlTextField.setEditable(false);
+		phonenumberTextField.setEditable(false);
+		jobTextField.setEditable(false);
+		addressTextField.setEditable(false);
+		streetTextField.setEditable(false);
+		streetnoTextField.setEditable(false);
+		zipTextField.setEditable(false);
+		cityTextField.setEditable(false);
+		countryTextField.setEditable(false);
 		ta.setEditable(false);
 	}
 
@@ -409,18 +437,156 @@ public class GuiMain {
 		cancelContactButton.setEnabled(false);
 	}
 
-	/**
-	 * @return Returns the TextField values to the controller
-	 */
-	public JTextField[] getTextFields() {
-		return tf;
+	public JButton getExitButton() {
+		return exitButton;
 	}
 
-	/**
-	 * @return Returns the AddressFields values to the controller
-	 */
-	public JTextField[] getAddressFields() {
-		return addressFields;
+	public void setExitButton(JButton exitButton) {
+		this.exitButton = exitButton;
+	}
+
+	public JButton getCancelContactButton() {
+		return cancelContactButton;
+	}
+
+	public void setCancelContactButton(JButton cancelContactButton) {
+		this.cancelContactButton = cancelContactButton;
+	}
+
+	public JButton getEditContactButton() {
+		return editContactButton;
+	}
+
+	public void setEditContactButton(JButton editContactButton) {
+		this.editContactButton = editContactButton;
+	}
+
+	public JButton getSaveContactButton() {
+		return saveContactButton;
+	}
+
+	public void setSaveContactButton(JButton saveContactButton) {
+		this.saveContactButton = saveContactButton;
+	}
+
+	public JButton getNewContactButton() {
+		return newContactButton;
+	}
+
+	public void setNewContactButton(JButton newContactButton) {
+		this.newContactButton = newContactButton;
+	}
+
+	public JTextField getGroupTextField() {
+		return groupTextField;
+	}
+
+	public void setGroupTextField(JTextField groupTextField) {
+		this.groupTextField = groupTextField;
+	}
+
+	public JTextField getFirstnameTextField() {
+		return firstnameTextField;
+	}
+
+	public void setFirstnameTextField(JTextField firstnameTextField) {
+		this.firstnameTextField = firstnameTextField;
+	}
+
+	public JTextField getLastnameTextField() {
+		return lastnameTextField;
+	}
+
+	public void setLastnameTextField(JTextField lastnameTextField) {
+		this.lastnameTextField = lastnameTextField;
+	}
+
+	public JTextField getDateofirthTextField() {
+		return dateofirthTextField;
+	}
+
+	public void setDateofirthTextField(JTextField dateofirthTextField) {
+		this.dateofirthTextField = dateofirthTextField;
+	}
+
+	public JTextField getEmailTextField() {
+		return emailTextField;
+	}
+
+	public void setEmailTextField(JTextField emailTextField) {
+		this.emailTextField = emailTextField;
+	}
+
+	public JTextField getUrlTextField() {
+		return urlTextField;
+	}
+
+	public void setUrlTextField(JTextField urlTextField) {
+		this.urlTextField = urlTextField;
+	}
+
+	public JTextField getPhonenumberTextField() {
+		return phonenumberTextField;
+	}
+
+	public void setPhonenumberTextField(JTextField phonenumberTextField) {
+		this.phonenumberTextField = phonenumberTextField;
+	}
+
+	public JTextField getJobTextField() {
+		return jobTextField;
+	}
+
+	public void setJobTextField(JTextField jobTextField) {
+		this.jobTextField = jobTextField;
+	}
+
+	public JTextField getAddressTextField() {
+		return addressTextField;
+	}
+
+	public void setAddressTextField(JTextField addressTextField) {
+		this.addressTextField = addressTextField;
+	}
+
+	public JTextField getStreetTextField() {
+		return streetTextField;
+	}
+
+	public void setStreetTextField(JTextField streetTextField) {
+		this.streetTextField = streetTextField;
+	}
+
+	public JTextField getStreetnoTextField() {
+		return streetnoTextField;
+	}
+
+	public void setStreetnoTextField(JTextField streetnoTextField) {
+		this.streetnoTextField = streetnoTextField;
+	}
+
+	public JTextField getZipTextField() {
+		return zipTextField;
+	}
+
+	public void setZipTextField(JTextField zipTextField) {
+		this.zipTextField = zipTextField;
+	}
+
+	public JTextField getCityTextField() {
+		return cityTextField;
+	}
+
+	public void setCityTextField(JTextField cityTextField) {
+		this.cityTextField = cityTextField;
+	}
+
+	public JTextField getCountryTextField() {
+		return countryTextField;
+	}
+
+	public void setCountryTextField(JTextField countryTextField) {
+		this.countryTextField = countryTextField;
 	}
 
 }
