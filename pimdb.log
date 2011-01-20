@@ -1,2 +1,3 @@
 /*C2*/SET SCHEMA PUBLIC
 CONNECT USER SA
+INSERT INTO CONTACTS VALUES(12,'null','Vornamecvvxcvxd','null','null','null','null','null','null','null','null','null','null','null','null')

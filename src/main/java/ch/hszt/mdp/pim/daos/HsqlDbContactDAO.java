@@ -8,6 +8,7 @@ import java.util.List;
 import ch.hszt.mdp.pim.daofactories.HsqlDbDAOFactory;
 import ch.hszt.mdp.pim.db.SqlStatements;
 import ch.hszt.mdp.pim.exceptions.DataAccessException;
+import ch.hszt.mdp.pim.models.Address;
 import ch.hszt.mdp.pim.models.Contact;
 
 /**
@@ -77,27 +78,28 @@ public class HsqlDbContactDAO implements IContactDAO {
 			
 			for (; rs.next();) {
 				Contact c = new Contact();
-				
+				c.setAddress(new Address());
 				//save data in contact object c
-				c.setGroup(rs.getNString("cGroup"));
-				c.setFirstName(rs.getNString("cFirstName"));
-				c.setLastName(rs.getNString("cLastName"));
-				c.setBirthDate(rs.getDate("cBirthday"));
-				c.setEmail(rs.getNString("cEmail"));
-				c.setUrl(rs.getNString("cUrl"));
-				c.setTelephone(rs.getNString("cTel"));
-				c.setJob(rs.getNString("cJob"));
-				c.getAddress().setStreet(rs.getNString("cAddStreet"));
-				c.getAddress().setHouseNumber(rs.getNString("cAddStreetNo"));
-				c.getAddress().setPostalCode(rs.getNString("cAddZip"));
-				c.getAddress().setPlace(rs.getNString("cAddCity"));
-				c.getAddress().setCountry(rs.getNString("cAddCountry"));
-				c.setComment(rs.getNString("cNotes"));
+				//c.setGroup(rs.getNString("cGroup"));
+				c.setFirstName(rs.getString("cFirstName"));
+				c.setLastName(rs.getString("cLastName"));
+				//c.setBirthDate(rs.getDate("cBirthday"));
+				c.setEmail(rs.getString("cEmail"));
+				c.setUrl(rs.getString("cUrl"));
+				c.setTelephone(rs.getString("cTel"));
+				c.setJob(rs.getString("cJob"));
+				c.getAddress().setStreet(rs.getString("cAddStreet"));
+				c.getAddress().setHouseNumber(rs.getString("cAddStreetNo"));
+				c.getAddress().setPostalCode(rs.getString("cAddZip"));
+				c.getAddress().setPlace(rs.getString("cAddCity"));
+				c.getAddress().setCountry(rs.getString("cAddCountry"));
+				c.setComment(rs.getString("cNotes"));
 				
 				//add object to list
 				contactList.add(c);
 			}			
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new DataAccessException();
 		}
 		return contactList;
@@ -117,6 +119,7 @@ public class HsqlDbContactDAO implements IContactDAO {
 			retCodeSt    = st.executeUpdate(SqlStatements.insertContact(contact));
 			st.close();
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new DataAccessException();
 		}
 		return retCodeSt;

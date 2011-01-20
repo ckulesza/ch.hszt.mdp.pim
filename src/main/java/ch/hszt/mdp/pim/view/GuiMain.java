@@ -39,6 +39,9 @@ public class GuiMain {
 	 * */
 	private static String VERSION = "0.1.5-14.01.2011";
 
+	
+	private JList list;
+	private DefaultListModel lm = new DefaultListModel();
 	private static boolean resizeFrame = true;
 	private static Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 	private static Color font_color = Color.BLUE;
@@ -170,8 +173,7 @@ public class GuiMain {
 	 * @return
 	 */
 	private JScrollPane createList() {
-		final JList list;
-		final DefaultListModel lm = new DefaultListModel();
+	
 
 		// Iterator<Contact> iter = contacts.iterator();
 		// while (iter.hasNext()) {
@@ -588,6 +590,22 @@ public class GuiMain {
 
 	public void setCountryTextField(JTextField countryTextField) {
 		this.countryTextField = countryTextField;
+	}
+
+	public JList getList() {
+		return list;
+	}
+
+	public void setList(JList list) {
+		this.list = list;
+	}
+
+	public DefaultListModel getLm() {
+		return lm;
+	}
+
+	public void setLm(DefaultListModel lm) {
+		this.lm = lm;
 	}
 
 }

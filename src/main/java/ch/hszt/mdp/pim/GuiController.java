@@ -2,6 +2,13 @@ package ch.hszt.mdp.pim;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
+import ch.hszt.mdp.pim.daofactories.DAOFactory;
+import ch.hszt.mdp.pim.daos.IContactDAO;
+import ch.hszt.mdp.pim.exceptions.DataAccessException;
+import ch.hszt.mdp.pim.models.Address;
+import ch.hszt.mdp.pim.models.Contact;
 import ch.hszt.mdp.pim.view.GuiMain;
 
 /**
@@ -39,6 +46,32 @@ public class GuiController implements ActionListener {
 		view.getZipTextField().addActionListener(this);
 	}
 
+	private void saveContact(Contact contact) {
+		DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.HSQLDB);
+		IContactDAO dao = factory.getCustomerDAO();
+		try {
+			dao.insertContact(contact);
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	private List<Contact> loadContacts() {
+		DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.HSQLDB);
+		IContactDAO dao = factory.getCustomerDAO();
+		try {
+			List<Contact> list = dao.loadAllContacts();
+			return list;
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
 	public void actionPerformed(ActionEvent e) {
 
 		String action = e.getActionCommand();
@@ -47,6 +80,11 @@ public class GuiController implements ActionListener {
 		}
 		if (action == "Save") {
 			view.setButtonsOnSave();
+			Contact contact = new Contact();
+			contact.setFirstName(view.getFirstnameTextField().getText());
+			contact.setAddress(new Address());
+			saveContact(contact);
+			fillList(loadContacts());
 		}
 		if (action == "Cancel") {
 			view.setButtonsOnCancel();
@@ -67,10 +105,16 @@ public class GuiController implements ActionListener {
 		}
 	}
 
-	/*// Only for test purposes
-	public static void main(String[] args) {
-		// GridGUIModel model=new GridGUIModel();
-		GuiMain view = new GuiMain();
-		GuiController controller = new GuiController(view);
-	}*/
+	private void fillList(List<Contact> contacts) {
+		for (int i = 0; i < contacts.size(); i++) {
+			view.getLm().addElement(contacts.get(i).getFirstName());
+			view.getList().setModel(view.getLm());
+		}
+	}
+
+	/*
+	 * // Only for test purposes public static void main(String[] args) { //
+	 * GridGUIModel model=new GridGUIModel(); GuiMain view = new GuiMain();
+	 * GuiController controller = new GuiController(view); }
+	 */
 }

@@ -13,7 +13,7 @@ import ch.hszt.mdp.pim.daos.IContactDAO;
  */
 public abstract class DAOFactory {
 
-	private static Class<?>[] classes = { SerializeDAOFactory.class };
+	private static Class<?>[] classes = { SerializeDAOFactory.class, HsqlDbDAOFactory.class };
 	private static DAOFactory[] daoFactories = new DAOFactory[classes.length];
 
 	// List of DAO types supported by the factory
