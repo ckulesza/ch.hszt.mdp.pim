@@ -67,10 +67,10 @@ public class GuiController implements ActionListener {
 		}
 	}
 
-	// Only for test purposes
+	/*// Only for test purposes
 	public static void main(String[] args) {
 		// GridGUIModel model=new GridGUIModel();
 		GuiMain view = new GuiMain();
 		GuiController controller = new GuiController(view);
-	}
+	}*/
 }

@@ -15,20 +15,28 @@ import ch.hszt.mdp.pim.models.Contact;
 import ch.hszt.mdp.pim.view.GuiMain;
 
 /**
- * @author Miroslav
+ * @author Miroslav Mirkovic
+ * 
  *
  */
 public class Controller implements ActionListener{
 	
 	private List<Contact> contacts = new ArrayList<Contact>();
-	private GuiMain view = new GuiMain();
 	private IContactDAO serial = new SerializeContactDAO();
 	
 
-	
+	/*
+	 * Die Main-Methode, die alles notwendige instanziert und auf
+	 * Benutzereingaben reagiert. Der Link zwischen dem View und dem Model
+	 * 
+	 * 
+	 */
 	public static void main(String[] args) {
-		
-
+		// GridGUIModel model=new GridGUIModel();
+		GuiMain view = new GuiMain();
+		GuiController control = new GuiController(view);
+		IContactDAO serial = new SerializeContactDAO();
+		control.view.getEmailTextField();
 	}
 
 	/*
@@ -57,17 +65,33 @@ public class Controller implements ActionListener{
 	/*
 	 * Die validateEmail Methode wird die Eingaben im Emailfeld des views validieren
 	 */
-	public boolean validateEmail(String s){
+	public static boolean validateEmail(String s){
 			boolean isEMailAddressOK = true;
-			Pattern p = Pattern.compile(".+@.+\\.[a-z]+\\.+[1,4]");
+			Pattern p = Pattern.compile("[a-zA-Z1-9]{1,}(.|_)?[a-zA-Z1-9]{2,}@[a-zA-Z1-9-]{2,}.[a-zA-Z]{2,5}");
 			Matcher m = p.matcher(s);
 
 			if (!m.matches()) {
 				isEMailAddressOK = false;
-				System.out.println("EMail adresse ist ungueltig. Sie enhaelt kein @ oder keine Domainname.\n"+
+				System.out.println("EMail adresse ist ungueltig. Sie enthaelt kein @ oder keinen Domainnamen.\n"+
 						"Beispiel: hansMuster@dingdong.com Email Adresse Fehler");
 			}
 			return isEMailAddressOK;
+	}
+	
+	/*
+	 * Die validateText
+	 * 	
+	*/
+	public static boolean validateText(String s){
+		boolean isTextfieldOK = true;
+		Pattern p = Pattern.compile("[a-zA-Z1-9]*");
+		Matcher m = p.matcher(s);
+
+		if (!m.matches()) {
+			isTextfieldOK = false;
+			System.out.println("Text enthaelt unzulaessige Zeichen!!!");
+		}
+		return isTextfieldOK;
 	}
 	
 	
