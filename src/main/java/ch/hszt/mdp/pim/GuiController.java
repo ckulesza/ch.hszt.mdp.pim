@@ -18,7 +18,25 @@ public class GuiController implements ActionListener {
 	{
 		// this.model=model;
 		this.view = view;
-		view.ActionListeners(this);
+		view.getAddressTextField().addActionListener(this);
+		view.getCancelContactButton().addActionListener(this);
+		view.getCityTextField().addActionListener(this);
+		view.getCountryTextField().addActionListener(this);
+		view.getDateofirthTextField().addActionListener(this);
+		view.getEditContactButton().addActionListener(this);
+		view.getEmailTextField().addActionListener(this);
+		view.getExitButton().addActionListener(this);
+		view.getFirstnameTextField().addActionListener(this);
+		view.getGroupTextField().addActionListener(this);
+		view.getJobTextField().addActionListener(this);
+		view.getLastnameTextField().addActionListener(this);
+		view.getNewContactButton().addActionListener(this);
+		view.getPhonenumberTextField().addActionListener(this);
+		view.getSaveContactButton().addActionListener(this);
+		view.getStreetnoTextField().addActionListener(this);
+		view.getStreetTextField().addActionListener(this);
+		view.getUrlTextField().addActionListener(this);
+		view.getZipTextField().addActionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -29,13 +47,9 @@ public class GuiController implements ActionListener {
 		}
 		if (action == "Save") {
 			view.setButtonsOnSave();
-			// model.writetodatabase(view.getTextFields());
-			// model.writetodatabase(view.getAddressFields());
 		}
 		if (action == "Cancel") {
 			view.setButtonsOnCancel();
-			// view.setTextFields(model.readfromdatabase());
-			// view.setAddressFields(model.readfromdatabase());
 		}
 		if (action == "Edit") {
 			view.setButtonsOnEdit();
@@ -47,8 +61,7 @@ public class GuiController implements ActionListener {
 			view.showInfo();
 		}
 		if (action == "Select Data Source") {
-			// dataSource muss dem Panel übergeben werden
-			// DataSoureSelectionGui ds = new DataSoureSelectionGui(dataSource);
+
 		}
 		if (action == "About") {
 		}
